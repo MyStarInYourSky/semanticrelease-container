@@ -1,0 +1,37 @@
+name: Container Release
+run-name: Container Release
+on:
+  push:
+    branches:
+      - main
+permissions:
+  actions: read
+  attestations: none
+  checks: read
+  contents: read
+  deployments: none
+  id-token: none
+  issues: read
+  discussions: read
+  packages: write
+  pages: none
+  pull-requests: read
+  repository-projects: none
+  security-events: none
+  statuses: none
+jobs:
+  build-container:
+    runs-on: [ubuntu-24.04]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run buildah build
+        run: |
+          buildah bud --tag "ghcr.io/mystarinyoursky/semanticrelease:latest"
+          buildah push "ghcr.io/mystarinyoursky/semanticrelease:latest"
