@@ -1,6 +1,6 @@
 FROM node:23-alpine
 
-LABEL org.opencontainers.image.source = "https://github.com/StarLightCraftedCloud/semanticrelease-container"
+LABEL org.opencontainers.image.source = "https://github.com/mystarinyoursky/semanticrelease-container"
 
 ENV NODE_PACKAGE_COMMITLINT_VER=19.7.1
 ENV NODE_PACKAGE_SEMANITICRELEASE_VER=11.0.1
